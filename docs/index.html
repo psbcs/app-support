@@ -1,21 +1,27 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>PSB CS Support</title>
   <meta name="description" content="Support for the PSB CS iOS app.">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <style>
     * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     body {
       margin: 0;
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
+      padding-top: max(24px, env(safe-area-inset-top));
+      padding-right: max(24px, env(safe-area-inset-right));
+      padding-bottom: max(24px, env(safe-area-inset-bottom));
+      padding-left: max(24px, env(safe-area-inset-left));
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       color: #1d1d1f;
       background: linear-gradient(160deg, #eaf1ff 0%, #f7f9fc 55%, #ffffff 100%);
@@ -48,7 +54,11 @@
       font-weight: 600;
       text-decoration: none;
       transition: background .2s, transform .2s;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      -webkit-tap-highlight-color: transparent;
     }
+    .btn:active { background: #0846c2; }
     .btn:hover { background: #0846c2; transform: translateY(-1px); }
     .tip {
       padding: 16px 18px;
@@ -58,9 +68,33 @@
       text-align: left;
     }
     .tip strong { color: #1d1d1f; }
+    /* iPad / tablets */
+    @media (min-width: 768px) {
+      .card { max-width: 600px; padding: 56px 48px; }
+      .logo { width: 120px; height: 120px; margin-bottom: 24px; }
+      h1 { font-size: 36px; }
+      p { font-size: 18px; }
+      .btn { padding: 15px 32px; font-size: 18px; }
+      .tip { font-size: 16px; }
+    }
+    /* Phones */
     @media (max-width: 480px) {
-      .card { padding: 36px 24px; }
+      body { padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
+      .card { padding: 32px 20px; border-radius: 20px; }
+      .logo { width: 80px; height: 80px; }
       h1 { font-size: 26px; }
+      p { font-size: 15px; }
+      .btn { display: block; margin: 20px 0 22px; padding: 14px 16px; font-size: 16px; }
+    }
+    /* Small phones */
+    @media (max-width: 360px) {
+      .btn { font-size: 15px; }
+    }
+    /* Landscape phones */
+    @media (max-height: 480px) and (orientation: landscape) {
+      body { align-items: flex-start; }
+      .card { padding: 24px; }
+      .logo { width: 64px; height: 64px; margin-bottom: 12px; }
     }
   </style>
 </head>
